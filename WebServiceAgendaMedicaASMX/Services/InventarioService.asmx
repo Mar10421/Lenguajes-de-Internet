@@ -1,0 +1,1 @@
+<%@ WebService Language="C#" CodeBehind="InventarioService.asmx.cs" Class="WebServiceAgendaMedicaASMX.Services.InventarioService" %>
