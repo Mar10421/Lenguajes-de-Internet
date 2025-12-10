@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Doctor</title>
+    <link rel="stylesheet" href="../styles.css">
+    
+    <style>
+        body { display: block; background-color: #f0f2f5; }
+        nav {
+            background-color: #198754; /* Verde para Doctor */
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav h1 { margin: 0; font-size: 1.5rem; }
+        nav button {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            width: auto;
+        }
+        nav button:hover { background-color: #c82333; }
+        .container {
+            max-width: 900px; /* Un solo contenedor centrado */
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        /* Contenedor de listas (Agenda) */
+        .lista-container {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .lista-container h3 { margin-top: 0; }
+        /* Estilos de Tabla */
+        table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+        table th, table td { border: 1px solid #ddd; padding: 0.75rem; text-align: left; }
+        table th { background-color: #f4f4f4; font-weight: 600; }
+        table tr:nth-child(even) { background-color: #f9f9f9; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h1>Mi Agenda (Doctor)</h1>
+        <button id="boton-logout">Cerrar Sesión</button>
+    </nav>
+
+    <main class="container">
+        
+        <div class="lista-container" id="mi-agenda-container">
+            <h3>Citas Programadas</h3>
+            <div id="lista-mi-agenda">
+                <p>Cargando agenda...</p>
+            </div>
+
+        <div id="reprogramar-container" style="display: none; margin-top: 1rem; padding: 1rem; background-color: #e2e6ea; border-radius: 8px;">
+                <h4>Reprogramar Cita</h4>
+                <form id="form-reprogramar">
+                    <input type="hidden" id="repo-cita-id">
+                    <div class="input-group">
+                        <label>Nueva Fecha y Hora:</label>
+                        <input type="datetime-local" id="repo-fecha" required>
+                    </div>
+                    <button type="submit" style="background-color: #ffc107; color: #000;">Guardar Nueva Fecha</button>
+                    <button type="button" onclick="cerrarModales()" style="background-color: #6c757d;">Cancelar</button>
+                </form>
+            </div>
+
+            <div id="cancelar-container" style="display: none; margin-top: 1rem; padding: 1rem; background-color: #f8d7da; border-radius: 8px;">
+                <h4 style="color: #721c24;">Cancelar Cita</h4>
+                <form id="form-cancelar">
+                    <input type="hidden" id="cancel-cita-id">
+                    <div class="input-group">
+                        <label>Motivo de Cancelación:</label>
+                        <input type="text" id="cancel-motivo" placeholder="Ej: Emergencia médica, Congreso..." required>
+                    </div>
+                    <button type="submit" style="background-color: #dc3545;">Confirmar Cancelación</button>
+                    <button type="button" onclick="cerrarModales()" style="background-color: #6c757d;">Volver</button>
+                </form>
+            </div>
+
+
+
+        </div>
+
+    </main>
+
+    <script src="../dashboard-Doctor.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+/* ===========================
+   ESTILO GENERAL
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a252f, #2c3e50, #34495e);
+    min-height: 100vh; /* Mejor que height: 100vh para evitar cortes */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Espacio para que no toque los bordes en móvil */
+}
+
+/* ===========================
+   CONTENEDOR REGISTRO (MÁS COMPACTO)
+=========================== */
+.login-container {
+    width: 100%;
+    max-width: 380px; /* Reducido de 460px */
+    background: #ffffff;
+    padding: 30px 25px; /* Reducido de 40px 45px */
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   TITULO
+=========================== */
+#registro-form h2 {
+    text-align: center;
+    font-size: 22px; /* Reducido de 26px */
+    color: #333;
+    margin-bottom: 20px; /* Reducido de 30px */
+    font-weight: 700;
+}
+
+/* ===========================
+   INPUT GROUP
+=========================== */
+.input-group {
+    margin-bottom: 15px; /* Reducido de 20px */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+    font-size: 13px; /* Etiqueta un poco más pequeña */
+    color: #555;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 10px 12px; /* Menos relleno vertical */
+    border-radius: 8px;
+    border: 1px solid #ddd; /* Borde más sutil */
+    font-size: 14px;
+    background: #fafafa;
+    transition: all 0.2s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #6366f1;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.15); /* Sombra más suave */
+    outline: none;
+}
+
+/* ===========================
+   BOTÓN "REGISTRARME"
+=========================== */
+#boton-registro {
+    width: 100%;
+    padding: 12px; /* Reducido de 14px */
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#boton-registro:hover {
+    background: linear-gradient(135deg, #4f46e5, #4338ca);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(79,70,229,0.3);
+}
+
+#boton-registro:active {
+    transform: scale(0.98);
+}
+
+/* ===========================
+   MENSAJES & LINK
+=========================== */
+.message {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #666;
+}
+
+a {
+    color: #4f46e5;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 480px) {
+    .login-container {
+        max-width: 100%;
+        padding: 25px 20px;
+    }
+}

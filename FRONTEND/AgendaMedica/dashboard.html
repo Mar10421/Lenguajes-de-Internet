@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Agenda Médica</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Agenda Médica</h2>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li>
+                    <button class="nav-btn active" data-target="seccion-citas">
+                        📅 Citas Médicas
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-btn" data-target="seccion-doctores">
+                        👨‍⚕️ Doctores
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-btn" data-target="seccion-medicamentos">
+                        💊 Medicamentos
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-btn" data-target="seccion-configuracion">
+                        ⚙️ Configuración
+                    </button>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button id="boton-logout" class="btn-logout">Cerrar Sesión</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            
+            <section id="seccion-citas" class="content-section active-section">
+                <header>
+                    <h1>Gestión de Citas</h1>
+                </header>
+
+                <div class="grid-citas">
+                    <div class="card">
+                        <h3>Agendar Nueva Cita</h3>
+                        <form id="form-agendar-cita">
+                            <div class="input-group">
+                                <label for="select-doctor">Doctor:</label>
+                                <select id="select-doctor" required>
+                                    <option value="">Cargando doctores...</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="input-fecha">Fecha y Hora:</label>
+                                <input type="datetime-local" id="input-fecha" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="input-motivo">Motivo:</label>
+                                <input type="text" id="input-motivo" maxlength="500" placeholder="Ej: Chequeo general">
+                            </div>
+                            <button type="submit" id="boton-agendar">Agendar Cita</button>
+                            <p id="mensaje-cita" class="message"></p>
+                        </form>
+                    </div>
+
+                    <div class="card full-height">
+                        <h3>Mis Próximas Citas</h3>
+                        <div id="lista-mis-citas">
+                            <p>Cargando citas...</p>
+                        </div>
+
+                        <div id="editar-cita-container" style="display: none; margin-top: 1.5rem; background-color: #fff3cd; padding: 1rem; border-radius: 5px;">
+                            <h4 style="margin-top: 0;">Modificar Cita</h4>
+                            <form id="form-editar-cita">
+                                <input type="hidden" id="edit-cita-id"> 
+                                <div class="input-group">
+                                    <label>Nueva Fecha:</label>
+                                    <input type="datetime-local" id="edit-fecha" required>
+                                </div>
+                                <div class="input-group">
+                                    <label>Nuevo Motivo:</label>
+                                    <input type="text" id="edit-motivo">
+                                </div>
+                                <button type="submit" style="background-color: #ffc107; color: #000;">Guardar Cambios</button>
+                                <button type="button" id="btn-cancelar-edicion" style="background-color: #6c757d; margin-top: 0.5rem; color: white;">Cancelar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="seccion-doctores" class="content-section">
+                <header>
+                    <h1>Directorio de Doctores</h1>
+                </header>
+                <div class="card">
+                    <h3>Doctores Disponibles</h3>
+                    <div id="lista-doctores-container">
+                        <p>Cargando doctores...</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="seccion-medicamentos" class="content-section">
+                <header>
+                    <h1>Medicamentos</h1>
+                </header>
+                <div class="grid-medicamentos">
+                    <div class="card">
+                        <h3>Buscar Medicamentos</h3>
+                        <div class="search-box">
+                            <input type="text" id="txtBuscar" placeholder="Buscar por nombre, código...">
+                            <button onclick="buscarMedicamentos()" class="btn-buscar">Buscar</button>
+                        </div>
+                        <div id="listaMedicamentos" class="lista-medicamentos"></div>
+                    </div>
+                    <div class="card">
+                        <h3>Carrito <span id="carritoCount" class="carrito-badge">0</span></h3>
+                        <div id="carritoLista" class="lista-carrito"></div>
+                        <button onclick="limpiarCarrito()" class="btn-limpiar">Limpiar Carrito</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="seccion-configuracion" class="content-section">
+                <header>
+                    <h1>Configuración de Cuenta</h1>
+                </header>
+                
+                <div style="max-width: 700px;">
+                    
+                    <div class="card">
+                        <h3>Actualizar Perfil</h3>
+                        <p style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">
+                            Deja los campos vacíos si no deseas cambiarlos.
+                        </p>
+                        <form id="form-update-perfil">
+                            <div class="input-group">
+                                <label>Nuevo Correo Electrónico:</label>
+                                <input type="email" id="update-email" placeholder="ejemplo@correo.com">
+                            </div>
+                            <div class="input-group">
+                                <label>Nueva Contraseña:</label>
+                                <input type="password" id="update-password" placeholder="Mínimo 6 caracteres" minlength="6">
+                            </div>
+                            <div class="input-group">
+                                <label>Confirmar Nueva Contraseña:</label>
+                                <input type="password" id="update-password-confirm" placeholder="Repite la contraseña">
+                            </div>
+                            <button type="submit" style="background-color: #28a745; color: white;">Guardar Cambios</button>
+                        </form>
+                    </div>
+
+                    <div class="card" style="border: 1px solid #f5c6cb;">
+                        <h3 style="border-bottom: 2px solid #dc3545; color: #dc3545;">Peligro</h3>
+                        <p style="margin-bottom: 1rem; color: #555;">
+                            Si eliminas tu cuenta, se perderán todas tus citas registradas y no podrás recuperarlas. Esta acción es irreversible.
+                        </p>
+                        
+                        <button id="boton-eliminar-cuenta" style="background-color: #dc3545; width: auto; padding: 0.8rem 1.5rem;">
+                            Eliminar mi Cuenta 
+                        </button>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="dashboard.js" defer></script>
+</body>
+</html>

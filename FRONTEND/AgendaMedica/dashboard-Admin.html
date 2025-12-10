@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador - Agenda Médica</title>
+    <link rel="stylesheet" href="dashboard-Admin.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li>
+                    <button class="nav-btn active" data-target="seccion-doctores">
+                        <span class="icon">👨‍⚕️</span> Doctores
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-btn" data-target="seccion-pacientes">
+                        <span class="icon">👥</span> Pacientes
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-btn" data-target="seccion-medicamentos">
+                        <span class="icon">💊</span> Medicamentos
+                    </button>
+                </li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button id="boton-logout" class="btn-logout">Cerrar Sesión</button>
+            </div>
+        </aside>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            
+            <!-- SECCIÓN DOCTORES -->
+            <section id="seccion-doctores" class="content-section active-section">
+                <header class="section-header">
+                    <h1>Gestión de Doctores</h1>
+                </header>
+
+                <div class="grid-layout">
+                    <div class="card">
+                        <h3>Registrar Nuevo Doctor</h3>
+                        <form id="form-doctor">
+                            <div class="input-group">
+                                <label for="doctor-nombre">Nombre Completo:</label>
+                                <input type="text" id="doctor-nombre" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="doctor-correo">Correo Electrónico:</label>
+                                <input type="email" id="doctor-correo" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="doctor-password">Contraseña:</label>
+                                <input type="password" id="doctor-password" required minlength="6">
+                            </div>
+                            <div class="input-group">
+                                <label for="doctor-especialidad">Especialidad:</label>
+                                <input type="text" id="doctor-especialidad" required>
+                            </div>
+                            <button type="submit" class="btn btn-success">Registrar Doctor</button>
+                            <p id="msg-doctor" class="message"></p>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h3>Lista de Doctores</h3>
+                        <div id="lista-doctores" class="table-container">
+                            <p class="loading">Cargando doctores...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN PACIENTES -->
+            <section id="seccion-pacientes" class="content-section">
+                <header class="section-header">
+                    <h1>Gestión de Pacientes</h1>
+                </header>
+
+                <div class="card">
+                    <h3>Lista de Pacientes</h3>
+                    <div id="lista-pacientes" class="table-container">
+                        <p class="loading">Cargando pacientes...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN MEDICAMENTOS -->
+            <section id="seccion-medicamentos" class="content-section">
+                <header class="section-header">
+                    <h1>Gestión de Medicamentos</h1>
+                </header>
+
+                <div class="grid-layout">
+                    <div class="card">
+                        <h3 id="titulo-form-med">Agregar Medicamento</h3>
+                        <form id="form-medicamento">
+                            <input type="hidden" id="med-id">
+                            <div class="grid-2">
+                                <div class="input-group">
+                                    <label for="med-codigo">Código:</label>
+                                    <input type="text" id="med-codigo" placeholder="Ej: MED001">
+                                </div>
+                                <div class="input-group">
+                                    <label for="med-nombre">Nombre:</label>
+                                    <input type="text" id="med-nombre" required>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="med-generico">Nombre Genérico:</label>
+                                <input type="text" id="med-generico">
+                            </div>
+                            <div class="input-group">
+                                <label for="med-laboratorio">Laboratorio:</label>
+                                <input type="text" id="med-laboratorio">
+                            </div>
+                            <div class="grid-2">
+                                <div class="input-group">
+                                    <label for="med-presentacion">Presentación:</label>
+                                    <input type="text" id="med-presentacion" placeholder="Ej: Tabletas">
+                                </div>
+                                <div class="input-group">
+                                    <label for="med-concentracion">Concentración:</label>
+                                    <input type="text" id="med-concentracion" placeholder="Ej: 500mg">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label>
+                                    <input type="checkbox" id="med-receta"> Requiere Receta
+                                </label>
+                            </div>
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-success" id="btn-guardar-med">Guardar</button>
+                                <button type="button" class="btn btn-secondary" id="btn-cancelar-med" style="display:none;">Cancelar</button>
+                            </div>
+                            <p id="msg-medicamento" class="message"></p>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h3>Lista de Medicamentos</h3>
+                        <div class="search-box">
+                            <input type="text" id="buscar-med" placeholder="Buscar medicamento...">
+                            <button onclick="buscarMedicamentos()" class="btn btn-primary">Buscar</button>
+                        </div>
+                        <div id="lista-medicamentos" class="table-container">
+                            <p class="loading">Cargando medicamentos...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="dashboard-Admin.js" defer></script>
+</body>
+</html>
