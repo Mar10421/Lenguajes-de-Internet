@@ -1,2 +1,2 @@
-# Lenguajes-de-Internet-2.0
+# Lenguajes-de-Internet
 Escuela 
